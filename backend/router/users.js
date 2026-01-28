@@ -1,4 +1,6 @@
 const { Router } = require('express');
+const express = require('express');
+const pool = require('../config/db');
 
 const router = Router();
 
@@ -11,6 +13,20 @@ const usuarios = [
     'a6',
     'a7',
 ]
+
+// GET /api/users
+
+// router.get("/", async (req, res) => {
+//   try {
+//     const [rows] = await pool.query(
+//       "SELECT id_usuario, nombre, email, rol, estado FROM usuario"
+//     );
+//     res.json(rows);
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// });
+
 
 router.get('/', (req, res) => {
   res.json({ 
