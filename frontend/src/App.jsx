@@ -1,30 +1,20 @@
-import { useEffect, useState } from "react"
-import axios from "axios"
-import { apiGet } from "./api"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Auth/Login";
+import Register from "./pages/Auth/Register";
 
-function App() {
-  const [dbTest, setDbTest] = useState(null);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    apiGet("/api/db-test")
-      .then(setDbTest)
-      .catch((e) => setError(e.message));
-  }, []);
-
+export default function App() {
   return (
-    <div style={{ padding: 20 }}>
-      <h1>Front conectado</h1>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
 
-      {error && <p style={{ color: "red" }}>❌ {error}</p>}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-      {dbTest ? (
-        <pre>{JSON.stringify(dbTest, null, 2)}</pre>
-      ) : (
-        <p>Cargando...</p>
-      )}
-    </div>
+        {/* fallback */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App
