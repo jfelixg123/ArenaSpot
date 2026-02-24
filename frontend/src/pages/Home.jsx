@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { apiGet } from "../api";
+import Navbar from "../components/Navbar";
+import Hero from "../components/Hero";
 
 export default function Home() {
   const [dbTest, setDbTest] = useState(null);
@@ -12,20 +14,21 @@ export default function Home() {
   }, []);
 
   return (
-    <div style={{ padding: 20 }}>
+    <>
+      <Navbar />
+      <Hero />
+
+      <div style={{ padding: 20 }}>
       <h1>ArenaSpot</h1>
 
-      {error && <p style={{ color: "red" }}>❌ {error}</p>}
+      {/* {error && <p style={{ color: "red" }}>❌ {error}</p>}
 
       {dbTest ? (
         <pre>{JSON.stringify(dbTest, null, 2)}</pre>
       ) : (
         <p>Cargando...</p>
-      )}
-
-      <div style={{ marginTop: 20 }}>
-        <a href="/login">Login</a> | <a href="/register">Registro</a>
+      )} */}
       </div>
-    </div>
+    </>
   );
 }

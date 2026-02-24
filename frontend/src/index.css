@@ -1,0 +1,6 @@
+/* Reset global de estilos */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* hace que el ancho y alto incluyan padding y border */
+}
