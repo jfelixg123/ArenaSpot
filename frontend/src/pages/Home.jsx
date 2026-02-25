@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { apiGet } from "../api";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
+import CardGaming from "../components/CardGaming";
 
 export default function Home() {
   const [dbTest, setDbTest] = useState(null);
@@ -16,10 +17,12 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <Hero />
+      <main style={styles.main}>
+        <Hero />
+        <CardGaming />
+      </main>
+      
 
-      <div style={{ padding: 20 }}>
-      <h1>ArenaSpot</h1>
 
       {/* {error && <p style={{ color: "red" }}>❌ {error}</p>}
 
@@ -28,7 +31,12 @@ export default function Home() {
       ) : (
         <p>Cargando...</p>
       )} */}
-      </div>
     </>
   );
 }
+
+const styles = {
+  main: {
+    backgroundColor: '#0E1117',
+  },
+};

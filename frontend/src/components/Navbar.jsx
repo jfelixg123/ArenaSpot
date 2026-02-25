@@ -29,6 +29,7 @@ const styles = {
     backgroundColor: '#1F2933',
     color: 'white',
     fontFamily: 'Inter, sans-serif',
+    height: '10vh',
   },
   logoImage: {
     height: '100px',
