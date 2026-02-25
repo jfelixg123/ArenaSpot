@@ -23,6 +23,7 @@ app.get("/api/db-test", async (req, res) => {
     const [rows] = await pool.query("SELECT 1 + 1 AS result");
     res.json({ ok: true, result: rows[0].result });
   } catch (err) {
+    console.error("DB-TEST ERROR:", err);
     res.status(500).json({ ok: false, error: err.message });
   }
 });
