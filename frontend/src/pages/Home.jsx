@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { apiGet } from "../api";
-import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
-import CardGaming from "../components/CardGaming";
+import Navbar from "../components/Navbar/Navbar";
+import Hero from "../components/Hero/Hero";
+import TrendingSection from "../components/TrendingCenters/TrendingSection";
+import ComoFuncionaSection from "../components/ComoFunciona/ComoFuncionaSection";
 
 export default function Home() {
   const [dbTest, setDbTest] = useState(null);
@@ -19,7 +20,8 @@ export default function Home() {
       <Navbar />
       <main style={styles.main}>
         <Hero />
-        <CardGaming />
+        <TrendingSection />
+        <ComoFuncionaSection />
       </main>
       
 

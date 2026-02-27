@@ -1,0 +1,41 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1F2933;
+  color: white;
+  height: 10vh;
+  padding: 0 2rem;
+}
+
+.logoImage {
+  height: 100px;
+  width: auto;
+  object-fit: contain;
+}
+
+.nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.enlace {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  margin-right: 1.5rem;
+  transition: opacity 0.3s ease;
+}
+
+.enlace:hover {
+  opacity: 0.7;
+}
+
+.enlaceImage {
+  height: 30px;
+  width: 30px;
+  object-fit: contain;
+  margin-right: 0.5rem;
+}
