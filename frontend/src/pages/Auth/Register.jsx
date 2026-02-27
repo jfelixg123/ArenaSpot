@@ -1,7 +1,8 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Register.module.css";
 import { registerClient, registerCenter } from "../../api";
+import MapPicker from "../../components/MapPicker";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ export default function Register() {
     password2: "",
   });
 
+  // ⚠️ IMPORTANTE: center debe estar arriba (se usa en buildAddressQuery/useEffect)
   const [center, setCenter] = useState({
     nombre: "",
     descripcion: "",
@@ -46,10 +48,73 @@ export default function Register() {
     ciudad: "",
     pais: "España",
 
-    // si luego metes mapa real
     lat: null,
     lng: null,
   });
+
+  // -------- MAP (preview mientras escribes) --------
+  const [mapPreview, setMapPreview] = useState(null); // {lat,lng}
+  const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
+
+  const buildAddressQuery = () => {
+    const parts = [
+      center.direccion,
+      center.numero,
+      center.codigo_postal,
+      center.ciudad,
+      center.pais,
+    ].filter(Boolean);
+
+    return parts.join(", ").trim();
+  };
+
+  async function geocode(query) {
+    if (!MAPBOX_TOKEN) return [];
+    const url =
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(query)}.json` +
+      `?access_token=${MAPBOX_TOKEN}&autocomplete=true&limit=5&language=es&country=es`;
+
+    const res = await fetch(url);
+    const data = await res.json();
+    return Array.isArray(data?.features) ? data.features : [];
+  }
+
+  // Debounce: mientras escribe (solo en step 3) -> mueve mapa al mejor resultado
+  useEffect(() => {
+    if (mode !== "center") return;
+    if (step !== 3) return;
+
+    const q = buildAddressQuery();
+    if (q.length < 6) {
+      setMapPreview(null);
+      return;
+    }
+
+    const t = setTimeout(async () => {
+      try {
+        const features = await geocode(q);
+
+        if (features[0]?.center) {
+          const [lng, lat] = features[0].center;
+          setMapPreview({ lat, lng });   // 👈 SOLO esto para mover el mapa
+        } else {
+          setMapPreview(null);
+        }
+      } catch {
+        setMapPreview(null);
+      }
+    }, 550);
+
+    return () => clearTimeout(t);
+  }, [
+    mode,
+    step,
+    center.direccion,
+    center.numero,
+    center.codigo_postal,
+    center.ciudad,
+    center.pais,
+  ]);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -81,29 +146,35 @@ export default function Register() {
   // ---------- validations ----------
   const validateClient = () => {
     const f = clientForm;
-    if (!f.nombre || !f.email || !f.password || !f.password2) return "Completa todos los campos obligatorios.";
+    if (!f.nombre || !f.email || !f.password || !f.password2)
+      return "Completa todos los campos obligatorios.";
     if (f.password !== f.password2) return "Las contraseñas no coinciden.";
-    if (f.password.length < 6) return "La contraseña debe tener al menos 6 caracteres.";
+    if (f.password.length < 6)
+      return "La contraseña debe tener al menos 6 caracteres.";
     return "";
   };
 
   const validateOwnerStep = () => {
-    if (!owner.nombre || !owner.email || !owner.password || !owner.password2) return "Completa los datos del propietario.";
+    if (!owner.nombre || !owner.email || !owner.password || !owner.password2)
+      return "Completa los datos del propietario.";
     if (owner.password !== owner.password2) return "Las contraseñas no coinciden.";
-    if (owner.password.length < 6) return "La contraseña debe tener al menos 6 caracteres.";
+    if (owner.password.length < 6)
+      return "La contraseña debe tener al menos 6 caracteres.";
     return "";
   };
 
   const validateCenterInfoStep = () => {
     if (!center.nombre) return "El nombre del gaming center es obligatorio.";
-    // opcional: validar horarios
-    if (!center.hoursOpen || !center.hoursClose) return "Indica el horario de apertura/cierre.";
+    if (!center.hoursOpen || !center.hoursClose)
+      return "Indica el horario de apertura/cierre.";
     return "";
   };
 
   const validateCenterLocationStep = () => {
     if (!center.direccion) return "La dirección es obligatoria.";
     if (!center.ciudad) return "La población/ciudad es obligatoria.";
+    // opcional: exigir lat/lng
+    // if (!center.lat || !center.lng) return "Selecciona la ubicación en el mapa.";
     return "";
   };
 
@@ -144,7 +215,9 @@ export default function Register() {
     resetErrors();
 
     const msg =
-      validateOwnerStep() || validateCenterInfoStep() || validateCenterLocationStep();
+      validateOwnerStep() ||
+      validateCenterInfoStep() ||
+      validateCenterLocationStep();
     if (msg) return setError(msg);
 
     const direccionFinal = `${center.direccion}${center.numero ? ` ${center.numero}` : ""}`.trim();
@@ -173,7 +246,7 @@ export default function Register() {
           hours: {
             open: center.hoursOpen,
             close: center.hoursClose,
-            closedWeekdays: [], // si luego añades checkbox por día
+            closedWeekdays: [],
           },
         },
       });
@@ -212,11 +285,9 @@ export default function Register() {
         </div>
 
         <nav className={styles.nav}>
-          <Link className={styles.navLink} to={mode === "center" ? "/register" : "/register-center"}>
-            {/* Solo decorativo si luego separas rutas */}
+          <Link className={styles.navLink} to="/login">
+            Iniciar sesión
           </Link>
-
-          <Link className={styles.navLink} to="/login">Iniciar sesión</Link>
         </nav>
       </header>
 
@@ -299,7 +370,6 @@ export default function Register() {
           ) : (
             // -------- CENTER WIZARD --------
             <form className={styles.form} onSubmit={submitCenterFinal}>
-              {/* Step badge */}
               <div className={styles.stepBadge}>
                 <span className={styles.stepDot}>{step}</span>
                 <span className={styles.stepText}>
@@ -345,16 +415,55 @@ export default function Register() {
                   <div className={styles.leftCol}>
                     <div className={styles.smallTitle}>Logo</div>
                     <div className={styles.logoRow}>
-                      <div className={styles.logoPreview} aria-hidden />
+                      <div className={styles.logoPreviewBox}>
+                        {center.logoUrl ? (
+                          <img
+                            src={center.logoUrl}
+                            alt="Logo preview"
+                            className={styles.logoPreviewImg}
+                          />
+                        ) : (
+                          <div className={styles.logoPlaceholder} />
+                        )}
+                      </div>
+
                       <div className={styles.logoActions}>
                         <label className={styles.label}>
-                          URL del logo (por ahora)
+                          Subir logo
                           <input
-                            className={styles.input}
-                            name="logoUrl"
-                            value={center.logoUrl}
-                            onChange={onCenterChange}
-                            placeholder="https://..."
+                            type="file"
+                            accept="image/*"
+                            onChange={async (e) => {
+                              const file = e.target.files[0];
+                              if (!file) return;
+
+                              // 1️⃣ PREVIEW INMEDIATO
+                              const previewUrl = URL.createObjectURL(file);
+                              setCenter((c) => ({ ...c, logoUrl: previewUrl }));
+
+                              // 2️⃣ SUBIR AL BACKEND
+                              const formData = new FormData();
+                              formData.append("logo", file);
+
+                              try {
+                                const res = await fetch(
+                                  "http://localhost:3001/api/auth/upload-logo",
+                                  {
+                                    method: "POST",
+                                    body: formData,
+                                  }
+                                );
+
+                                const data = await res.json();
+
+                                if (data.ok) {
+                                  // 3️⃣ Reemplazamos preview local por URL real del servidor
+                                  setCenter((c) => ({ ...c, logoUrl: data.url }));
+                                }
+                              } catch (err) {
+                                console.error("Error subiendo logo", err);
+                              }
+                            }}
                           />
                         </label>
                       </div>
@@ -426,7 +535,6 @@ export default function Register() {
                       <input className={styles.input} name="ciudad" value={center.ciudad} onChange={onCenterChange} />
                     </label>
 
-                    {/* País opcional */}
                     <label className={styles.label}>
                       País
                       <input className={styles.input} name="pais" value={center.pais} onChange={onCenterChange} />
@@ -434,11 +542,23 @@ export default function Register() {
                   </div>
 
                   <div className={styles.rightCol}>
-                    <div className={styles.mapMock} aria-hidden>
-                      <div className={styles.mapHint}>Mapa (placeholder)</div>
-                    </div>
+                    <MapPicker
+                      value={center.lat && center.lng ? { lat: center.lat, lng: center.lng } : null}
+                      flyTo={mapPreview}
+                      onChange={({ lat, lng }) => setCenter((c) => ({ ...c, lat, lng }))}
+                      center={{ lat: 41.3851, lng: 2.1734 }}
+                      zoom={12}
+                      resizeSignal={step}
+                    />
+
                     <div className={styles.mapNote}>
-                      Luego puedes integrar Google Maps/Leaflet y rellenar lat/lng.
+                      Haz click en el mapa para seleccionar la ubicación.
+                      {center.lat && center.lng ? (
+                        <div style={{ marginTop: 6 }}>
+                          <b>Lat:</b> {Number(center.lat).toFixed(6)} &nbsp; <b>Lng:</b>{" "}
+                          {Number(center.lng).toFixed(6)}
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                 </div>

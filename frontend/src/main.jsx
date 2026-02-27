@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import "./styles/variables.css";
 import "./styles/global.css";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 
 createRoot(document.getElementById('root')).render(
