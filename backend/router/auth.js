@@ -3,7 +3,10 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const pool = require("../config/db");
 
+
 const router = express.Router();
+const upload = require("../middleware/upload");
+
 
 const generateToken = (user) => {
   return jwt.sign(
@@ -230,6 +233,14 @@ console.log("JWT_SECRET exists?:", Boolean(process.env.JWT_SECRET));
     console.error(err);
     res.status(500).json({ message: "Error en login" });
   }
+});
+
+// Upload logo
+router.post("/upload-logo", upload.single("logo"), (req, res) => {
+  if (!req.file) return res.status(400).json({ ok: false, error: "No se subió imagen" });
+
+  const url = `http://localhost:3001/uploads/logos/${req.file.filename}`;
+  res.json({ ok: true, url });
 });
 
 module.exports = router;
