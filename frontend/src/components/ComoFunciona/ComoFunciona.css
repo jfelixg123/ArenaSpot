@@ -1,7 +1,6 @@
 .como-funciona-section {
   padding: 2rem;
 }
-
 .section-titulo {
   color: white;
   font-size: 2rem;
@@ -12,4 +11,10 @@
   color: white;
   font-size: 1.2rem;
   text-align: center;
+}
+.pasos-div{
+  display: flex;
+  justify-content: center;
+  gap: 8rem;
+  margin-top: 2rem;
 }

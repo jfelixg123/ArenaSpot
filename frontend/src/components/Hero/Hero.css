@@ -31,19 +31,3 @@
   color: #1F8AFF;
 }
 
-.hero-button {
-  padding: 1rem 3rem;
-  font-size: 1.1rem;
-  background-color: #1F8AFF;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-.hero-button:hover {
-  background-color: #1672d1;
-  transform: translateY(-3px);
-}

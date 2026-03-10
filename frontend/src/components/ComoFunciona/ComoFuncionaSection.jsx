@@ -1,4 +1,7 @@
 import React from "react";
+import descubreImage from '../../assets/images/descubre-pasos.png';
+import reservaImage from '../../assets/images/reserva-pasos.png';
+import mandoImage from '../../assets/images/mando-pasos.png';
 import "./ComoFunciona.css";
 import PasoCard from './PasoCard';
 function ComoFuncionaSection() {
@@ -10,9 +13,27 @@ function ComoFuncionaSection() {
             <h4 className="section-subtitulo">comienza aquí. Tres sencillos pasos para </h4>
             <h4 className="section-subtitulo">adentrarte en el juego.</h4>   
         </div>
-        <PasoCard />
-        <PasoCard />
-        <PasoCard />
+        <div className="pasos-div"> 
+            <PasoCard 
+              numero = "1"
+              imagen={descubreImage} 
+              titulo="DESCUBRE" 
+              descripcion="Encuentre las mejores plataformas y conexiones de fibra de alta velocidad cerca de usted con nuestro mapa en tiempo real." 
+            />
+            <PasoCard
+              numero = "2"
+              imagen={reservaImage} 
+              titulo="RESERVA" 
+              descripcion="Elige tu estación, periféricos y franja horaria al instante sin coste de reserva." 
+            />
+            <PasoCard
+              numero = "3" 
+              imagen={mandoImage} 
+              titulo="DOMINA" 
+              descripcion="Preséntese, inicie sesión y ascienda en las tablas de clasificación locales con equipo profesional." 
+            />
+        </div>
+        
     </section>
   );
 }

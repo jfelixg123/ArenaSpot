@@ -4,6 +4,14 @@ import Navbar from "../components/Navbar/Navbar";
 import Hero from "../components/Hero/Hero";
 import TrendingSection from "../components/TrendingCenters/TrendingSection";
 import ComoFuncionaSection from "../components/ComoFunciona/ComoFuncionaSection";
+import Comunidad from "../components/Comunidad/ComunidadSection";
+import Footer from "../components/Footer/Footer";
+
+const styles = {
+  main: {
+    minHeight: "100vh",
+  },
+};
 
 export default function Home() {
   const [dbTest, setDbTest] = useState(null);
@@ -22,23 +30,9 @@ export default function Home() {
         <Hero />
         <TrendingSection />
         <ComoFuncionaSection />
+        <Comunidad />
       </main>
-      
-
-
-      {/* {error && <p style={{ color: "red" }}>❌ {error}</p>}
-
-      {dbTest ? (
-        <pre>{JSON.stringify(dbTest, null, 2)}</pre>
-      ) : (
-        <p>Cargando...</p>
-      )} */}
+      <Footer />
     </>
   );
 }
-
-const styles = {
-  main: {
-    backgroundColor: '#0E1117',
-  },
-};
