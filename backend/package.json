@@ -18,5 +18,8 @@
     "multer": "^2.1.0",
     "mysql2": "^3.16.2"
   },
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
 }

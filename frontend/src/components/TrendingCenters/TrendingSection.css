@@ -1,0 +1,18 @@
+.gaming-section {
+  padding: 2rem;
+  margin-bottom: 3rem;
+}
+
+.gaming-title {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.gaming-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
