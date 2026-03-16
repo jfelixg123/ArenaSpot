@@ -1,5 +1,5 @@
 .hero {
-  height: 90vh;
+  min-height: calc(100vh - var(--navbar-height));
   background: radial-gradient(circle at center, #10233b, #050b14);
   color: white;
   display: flex;
