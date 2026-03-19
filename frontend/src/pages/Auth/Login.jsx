@@ -2,8 +2,8 @@ import { useState } from "react";
 import { login } from "../../api";
 import Navbar from "../../components/Navbar/Navbar";
 import AuthHeader from "../../components/AuthHeader/AuthHeader";
-import styles from "./Login.module.css";
-
+import FormLogin from "../../components/FormLogin/FormLogin";
+import "./Login.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -22,18 +22,21 @@ export default function Login() {
   };
 
   return (
-    <div className={styles.loginPage}>
+    <div className="login-page">
       <Navbar />
-      <AuthHeader 
-        authHeaderText="Iniciar sesión"
-      />
-      <form onSubmit={handleLogin} style={{ maxWidth: 400, margin: "40px auto" }}>
-        <h2>Login</h2>
-        <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-        <input value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" type="password" />
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <button>Entrar</button>
-      </form>
-    </div>
+      <div className="login-section">
+        <AuthHeader authHeaderText="Iniciar sesión" />
+        {/* Pasamos los estados y la función al componente visual */}
+        <FormLogin 
+          email={email} 
+          setEmail={setEmail} 
+          password={password} 
+          setPassword={setPassword} 
+          handleLogin={handleLogin} 
+          error={error} 
+        />
+      </div>
+      
+    </div>  
   );
 }

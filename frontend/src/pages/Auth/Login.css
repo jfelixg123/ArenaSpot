@@ -1,0 +1,14 @@
+.login-page {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #0b0e14; 
+}
+
+.login-section {
+    height: 70vh;
+    padding-top: 50px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+}

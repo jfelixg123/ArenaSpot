@@ -8,11 +8,11 @@
     width: 70px;
     object-fit: contain;
 }
-.auth-text{
+.auth-text {
     font-size: 30px;
-    margin-top: 20px;
+    margin-top: 25px;
+    margin-bottom: 10px;
     color: white;
+    font-weight: 700;
 }
-.span {
-    color: #1F8AFF;
-}
+

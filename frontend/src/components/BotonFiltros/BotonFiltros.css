@@ -1,0 +1,37 @@
+.boton-filtrar-azul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    
+    /* Colores idénticos al botón "Buscar" */
+    background-color: #1F8AFF; 
+    color: white;
+    
+    /* Estructura */
+    border: none;
+    border-radius: 8px; /* Redondeado igual al de la barra */
+    padding: 10px 16px; /* Proporción similar al botón de la imagen */
+    
+    /* Tipografía */
+    font-size: 15px;
+    font-weight: 600;
+    
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.boton-filtrar-azul:hover {
+    background-color: #5AA9FF; /* Un azul más claro al pasar el ratón */
+}
+
+.icono-blanco {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+/* Efecto al pulsar */
+.boton-filtrar-azul:active {
+    transform: scale(0.97);
+}

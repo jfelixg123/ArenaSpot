@@ -8,6 +8,12 @@
   padding: 0 1.25rem;
 }
 
+.logoLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
 .logoImage {
   height: 72px;
   width: auto;
