@@ -26,7 +26,6 @@ export default function Login() {
       <Navbar />
       <div className="login-section">
         <AuthHeader authHeaderText="Iniciar sesión" />
-        {/* Pasamos los estados y la función al componente visual */}
         <FormLogin 
           email={email} 
           setEmail={setEmail} 
