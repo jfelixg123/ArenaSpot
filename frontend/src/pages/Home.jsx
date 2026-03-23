@@ -1,38 +1,34 @@
-import { useEffect, useState } from "react";
-import { apiGet } from "../api";
+import React from "react";
 import Navbar from "../components/Navbar/Navbar";
-import Hero from "../components/Hero/Hero";
-import TrendingSection from "../components/TrendingCenters/TrendingSection";
-import ComoFuncionaSection from "../components/ComoFunciona/ComoFuncionaSection";
-import Comunidad from "../components/Comunidad/ComunidadSection";
 import Footer from "../components/Footer/Footer";
+import BarraBuscar from "../components/BarraBuscar/BarraBuscar";
+import MapPicker from "../components/MapPicker";
+import BotonFiltros from "../components/BotonFiltros/BotonFiltros";
+import CardCenters from "../components/CardCenters/CardCenters";
+import "./Home.css";
 
-const styles = {
-  main: {
-    minHeight: "100vh",
-  },
-};
+function Home() {
+    const handleSearch = () => {};
 
-export default function Home() {
-  const [dbTest, setDbTest] = useState(null);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    apiGet("/api/db-test")
-      .then(setDbTest)
-      .catch((e) => setError(e.message));
-  }, []);
-
-  return (
-    <>
-      <Navbar />
-      <main style={styles.main}>
-        <Hero />
-        <TrendingSection />
-        <ComoFuncionaSection />
-        <Comunidad />
-      </main>
-      <Footer />
-    </>
-  );
+    return (
+        <>
+            <Navbar />
+            <main className="home-main">
+                <h1>Busca tu <span className="span">Gaming center</span> más cercano</h1>
+                <BarraBuscar onSearch={handleSearch} />
+                <MapPicker />
+                <div className="home-listado-header">
+                    <h1>Listado</h1>
+                    <BotonFiltros onClick={() => {}} />
+                </div>
+                <CardCenters />
+                <CardCenters />
+                <CardCenters />
+                <CardCenters />
+            </main>
+            <Footer />
+        </>
+    );
 }
+
+export default Home;

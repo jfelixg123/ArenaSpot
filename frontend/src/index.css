@@ -13,9 +13,6 @@ body,
   font-family: 'Inter', sans-serif;
 }
 
-main {
-  background-color: #0E1117;
-}
 .hero-button {
   padding: 1rem 3rem;
   font-size: 1.1rem;
@@ -29,6 +26,9 @@ main {
 }
 
 .hero-button:hover {
-  background-color: #1672d1;
+  background-color: #5AA9FF;
   transform: translateY(-3px);
+}
+.span {
+    color: #1F8AFF;
 }

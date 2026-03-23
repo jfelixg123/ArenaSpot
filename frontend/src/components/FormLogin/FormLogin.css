@@ -1,0 +1,87 @@
+/* La caja principal */
+.login-wrapper {
+  width: 100%; /* Asegura que ocupe todo el ancho del padre */
+  display: flex;
+  justify-content: center;
+}
+
+.login-card {
+  background-color: #1F2933; /* Fondo de la tarjeta */
+  padding: 30px;
+  border: 1px solid #1F8AFF;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Etiquetas (Labels) */
+.form-field label {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Inputs */
+.login-input {
+  background-color: #0E1117;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  color: #ffffff;
+  padding: 10px 13px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Efecto de foco (Borde azul como en tu imagen) */
+.login-input:focus {
+  border-color: #1F8AFF;
+  box-shadow: 0 0 0 1px #1F8AFF;
+}
+
+/* Botón Iniciar Sesión */
+.login-submit-btn {
+  background-color: #1F8AFF;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.2s;
+}
+
+.login-submit-btn:hover {
+  background-color: #5AA9FF;
+}
+
+/* Texto inferior */
+.login-footer {
+  color: #ffffff;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.login-footer a {
+  color: #1F8AFF;
+  text-decoration: none;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
+}
