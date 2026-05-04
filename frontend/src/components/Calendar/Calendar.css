@@ -1,0 +1,63 @@
+/* Fondo */
+.fc {
+  background: #0e1117;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+/* Header días */
+.fc-col-header {
+  background: #1f2933 !important;
+  color: white;
+}
+
+/* Grid */
+.fc-timegrid-slot {
+  border-color: #1a222c !important;
+}
+
+/* Línea actual */
+.fc-timegrid-now-indicator-line {
+  border-color: var(--primary);
+}
+
+/* EVENTOS (tipo tarjeta) */
+.fc-event {
+  background: linear-gradient(135deg, #1f8aff, #5aa9ff) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 4px !important;
+  font-size: 12px;
+}
+
+/* Hover */
+.fc-event:hover {
+  transform: scale(1.02);
+  transition: 0.2s;
+}
+
+/* Hora lateral */
+.fc-timegrid-axis {
+  color: var(--muted);
+}
+
+/* Toolbar */
+.fc-toolbar-title {
+  color: white !important;
+  font-weight: bold;
+}
+
+/* Botones */
+.fc-button {
+  background: #1f2933 !important;
+  border: none !important;
+  color: white !important;
+}
+
+.fc-button:hover {
+  background: var(--primary) !important;
+}
+
+.fc-button-active {
+  background: var(--primary) !important;
+}

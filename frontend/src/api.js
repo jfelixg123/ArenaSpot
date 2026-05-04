@@ -74,15 +74,24 @@ export async function registerCenter(payload) {
   return apiPost("/api/auth/register-center", payload);
 }
 
-// Login
-export async function login(payload) {
-  const data = await apiPost("/api/auth/login", payload);
+// Login Usuarios 
+export const login = async (data) => {
+  const res = await fetch("http://localhost:3001/api/auth/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  });
 
-  localStorage.setItem("token", data.token);
-  localStorage.setItem("user", JSON.stringify(data.user));
+  const result = await res.json();
 
-  return data.user;
-}
+  if (!res.ok) {
+    throw new Error(result.message || "Error en login");
+  }
+
+  return result;
+};
 
 // Logout
 export function logout() {
@@ -95,4 +104,3 @@ export function getCurrentUser() {
   const raw = localStorage.getItem("user");
   return raw ? JSON.parse(raw) : null;
 }
-

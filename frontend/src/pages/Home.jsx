@@ -6,9 +6,12 @@ import MapPicker from "../components/MapPicker";
 import BotonFiltros from "../components/BotonFiltros/BotonFiltros";
 import CardCenters from "../components/CardCenters/CardCenters";
 import "./Home.css";
+import IconoFiltrar from '../assets/images/filtrar.png';
 
 function Home() {
     const handleSearch = () => {};
+
+    const handleFiltros = () => {};
 
     return (
         <>
@@ -19,7 +22,7 @@ function Home() {
                 <MapPicker />
                 <div className="home-listado-header">
                     <h1>Listado</h1>
-                    <BotonFiltros onClick={() => {}} />
+                    <BotonFiltros texto={"Filtros"} onClick={handleFiltros} icono={IconoFiltrar} />
                 </div>
                 <CardCenters />
                 <CardCenters />

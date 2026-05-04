@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const pool = require("../config/db");
+const authMiddleware = require("../middleware/auth");
 
 
 const router = express.Router();
@@ -25,7 +26,7 @@ const norm = (s) => (s == null ? null : String(s).trim());
 router.post("/register-center", async (req, res) => {
   const { owner, center } = req.body || {};
 
-  // --- Validación mínima (ajusta a tu gusto) ---
+  // --- Validación mínima ---
   const ownerNombre = norm(owner?.nombre);
   const ownerEmail = norm(owner?.email)?.toLowerCase();
   const ownerPassword = owner?.password;
@@ -204,8 +205,6 @@ router.post("/register-client", async (req, res) => {
 
 // LOGIN
 router.post("/login", async (req, res) => {
-  console.log("LOGIN BODY:", req.body);
-console.log("JWT_SECRET exists?:", Boolean(process.env.JWT_SECRET));
   try {
     const { email, password } = req.body;
 
@@ -228,6 +227,7 @@ console.log("JWT_SECRET exists?:", Boolean(process.env.JWT_SECRET));
     delete user.password;
 
     res.json({ user, token });
+
   } catch (err) {
     console.error("LOGIN ERROR:", err);
     console.error(err);
@@ -243,4 +243,24 @@ router.post("/upload-logo", upload.single("logo"), (req, res) => {
   res.json({ ok: true, url });
 });
 
+router.get("/me", authMiddleware, async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      "SELECT id_usuario, nombre, email, rol FROM usuario WHERE id_usuario = ?",
+      [req.user.id_usuario]
+    );
+
+    if (!rows.length) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    res.json(rows[0]);
+  } catch (err) {
+    console.error("ME ERROR:", err);
+    res.status(500).json({ message: "Error interno" });
+  }
+});
+
 module.exports = router;
+
+

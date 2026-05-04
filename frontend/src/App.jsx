@@ -3,20 +3,30 @@ import Home from "./pages/Home";
 import Landing from "./pages/Landing";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
+import DashboardGC from "./pages/DashboardGC";
+import Inventario from "./pages/Inventario";
 
 export default function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Landing />} />
 
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/home" element={<Home />} />
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Landing />} />
 
-        {/* fallback */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </BrowserRouter>
-  );
+                <Route path="/login" element={<Login />} />
+
+                <Route path="/register" element={<Register />} />
+
+                <Route path="/home" element={<Home />} />
+
+                {/* Hay que protejer ruta por rol */}
+                <Route path="/dashboardGC" element={<DashboardGC />} />
+
+                <Route path="/gestionarInventario" element={<Inventario/>}/>
+
+                {/* fallback */}
+                <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+        </BrowserRouter>
+    );
 }

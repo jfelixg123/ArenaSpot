@@ -45,3 +45,65 @@
   object-fit: contain;
   margin-right: 0.5rem;
 }
+
+/* DROPDOWN CONTENEDOR */
+.profile-dropdown {
+  position: relative;
+}
+
+/* BOTÓN PERFIL */
+.profile-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+}
+
+/* AVATAR */
+.profile-avatar {
+  width: 40px;
+  height: 40px;
+  background: #0e1117;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* MENÚ */
+.dropdown-menu {
+  position: absolute;
+  top: 55px;
+  right: 0;
+  background: #11161d;
+  padding: 15px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 180px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  z-index: 100;
+}
+
+/* ITEMS */
+.dropdown-item {
+  background: linear-gradient(135deg, #1f8aff, #5aa9ff);
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  font-weight: 500;
+}
+
+.dropdown-item:hover {
+  opacity: 0.85;
+}
+
+/* LOGOUT */
+.logout {
+  background: #ff4d4f;
+}
