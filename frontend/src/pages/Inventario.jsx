@@ -7,9 +7,6 @@ import './Inventario.css';
 import IconoFiltrar from '../assets/images/filtrar.png';
 import IconoAñadir from '../assets/images/añadir.png';
 
-
-
-
 function Inventario() {
     const [showModal, setShowModal] = useState(false);
     const [nombre, setNombre] = useState("");

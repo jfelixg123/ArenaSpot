@@ -17,11 +17,13 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 const usersRouter = require("./router/users");
 const reservasRouter = require("./router/reservas");
 const inventarioRouter = require("./router/inventario");
+const trendingRouter = require("./router/trending");
 
 app.use("/api/users", usersRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/reservas", reservasRouter);
 app.use('/api/inventario', inventarioRouter);
+app.use('/api/trendingGamingCenters', trendingRouter);
 
 
 // test rápido DB
