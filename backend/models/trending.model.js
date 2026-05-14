@@ -3,36 +3,45 @@ const db = require("../config/db");
 const getTrendingCentersModel = async () => {
 
     const query = `
-        SELECT
-            gc.id_center,
-            gc.nombre,
-            gc.direccion,
-            MIN(t.precio_hora) AS precio,
-            cm.url AS imagen
+    SELECT
+        gc.id_center,
+        gc.nombre,
+        gc.direccion,
+        MIN(t.precio_hora) AS precio,
+        cm.url AS imagen,
+        COUNT(r.id_reserva) AS total_reservas
 
-        FROM gaming_center gc
+    FROM gaming_center gc
 
-        LEFT JOIN zona z
-            ON z.id_center = gc.id_center
+    LEFT JOIN zona z
+        ON z.id_center = gc.id_center
 
-        LEFT JOIN tarifa t
-            ON t.id_zona = z.id_zona
-            AND t.activa = true
+    LEFT JOIN tarifa t
+        ON t.id_zona = z.id_zona
+        AND t.activa = true
 
-        LEFT JOIN center_media cm
-            ON cm.id_center = gc.id_center
-            AND cm.tipo = 'cover'
+    LEFT JOIN center_media cm
+        ON cm.id_center = gc.id_center
+        AND cm.tipo = 'cover'
 
-        WHERE gc.estado = 'activo'
+    LEFT JOIN puesto p
+        ON p.id_zona = z.id_zona
 
-        GROUP BY
-            gc.id_center,
-            gc.nombre,
-            gc.direccion,
-            cm.url
+    LEFT JOIN reserva r
+        ON r.id_puesto = p.id_puesto
 
-        LIMIT 4
-    `;
+    WHERE gc.estado = 'activo'
+
+    GROUP BY
+        gc.id_center,
+        gc.nombre,
+        gc.direccion,
+        cm.url
+
+    ORDER BY total_reservas DESC
+
+    LIMIT 4
+`;
 
     const [rows] = await db.query(query);
 

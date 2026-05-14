@@ -18,12 +18,14 @@ const usersRouter = require("./router/users");
 const reservasRouter = require("./router/reservas");
 const inventarioRouter = require("./router/inventario");
 const trendingRouter = require("./router/trending");
+const centerRouter = require("./router/center");
 
 app.use("/api/users", usersRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/reservas", reservasRouter);
 app.use('/api/inventario', inventarioRouter);
 app.use('/api/trendingGamingCenters', trendingRouter);
+app.use("/api/centers", centerRouter);
 
 
 // test rápido DB
