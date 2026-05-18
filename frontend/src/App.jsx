@@ -6,6 +6,8 @@ import Register from "./pages/Auth/Register";
 import DashboardGC from "./pages/DashboardGC";
 import Inventario from "./pages/Inventario";
 import CenterDetail from "./pages/CenterDetail";
+import Success from "./pages/Success";
+import Cancel from "./pages/Cancel";
 
 export default function App() {
 
@@ -21,6 +23,10 @@ export default function App() {
                 <Route path="/home" element={<Home />} />
 
                 <Route path="/centers/:id" element={<CenterDetail />} />
+
+                <Route path="/success" element={<Success />} />
+
+                <Route path="/cancel"  element={<Cancel />}  />
 
                 {/* Hay que protejer ruta por rol */}
                 <Route path="/dashboardGC" element={<DashboardGC />} />

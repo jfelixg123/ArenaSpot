@@ -1,0 +1,120 @@
+.success-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top, #12233d 0%, #050b16 60%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    color: white;
+}
+
+.success-container {
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+}
+
+.success-title {
+    font-size: 52px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.success-subtitle {
+    font-size: 20px;
+    color: #b8c2d0;
+    margin-bottom: 40px;
+}
+
+.success-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 24px;
+    padding: 40px;
+    backdrop-filter: blur(10px);
+    margin-bottom: 40px;
+}
+
+.success-card-title {
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.success-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.success-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.success-item span {
+    color: #9aa4b2;
+    font-size: 15px;
+}
+
+.success-item strong {
+    font-size: 24px;
+}
+
+.success-price {
+    color: #2cff8f;
+}
+
+.success-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.success-btn {
+    padding: 16px 32px;
+    border-radius: 14px;
+    font-size: 18px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.success-btn.primary {
+    background: #1f8aff;
+    color: white;
+}
+
+.success-btn.primary:hover {
+    background: #4ea5ff;
+}
+
+.success-btn.secondary {
+    border: 1px solid #1f8aff;
+    color: #1f8aff;
+}
+
+.success-btn.secondary:hover {
+    background: rgba(31,138,255,0.1);
+}
+
+@media (max-width: 768px) {
+
+    .success-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .success-title {
+        font-size: 38px;
+    }
+
+    .success-buttons {
+        flex-direction: column;
+    }
+
+}

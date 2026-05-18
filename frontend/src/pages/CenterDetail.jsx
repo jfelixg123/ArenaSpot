@@ -12,6 +12,33 @@ function CenterDetail() {
     const [center, setCenter] = useState(null);
     const [specs, setSpecs] = useState([]);
     const [games, setGames] = useState([]);
+    const [selectedDate, setSelectedDate] = useState("");
+    const [startHour, setStartHour] = useState("");
+    const [duration, setDuration] = useState(1);
+
+    const serviceFee = 2;
+
+    const basePrice =
+        duration * parseFloat(center?.precio || 0);
+
+    const totalPrice =
+        basePrice + serviceFee;
+
+    const calculateEndHour = () => {
+
+        if (!startHour) return "";
+
+        const [hours, minutes] = startHour.split(":");
+
+        const date = new Date();
+
+        date.setHours(parseInt(hours));
+        date.setMinutes(parseInt(minutes));
+
+        date.setHours(date.getHours() + duration);
+
+        return date.toTimeString().slice(0, 5);
+    };
 
     useEffect(() => {
 
@@ -54,6 +81,56 @@ function CenterDetail() {
         );
 
     }
+
+    const handleBooking = async () => {
+
+        try {
+
+            const token = localStorage.getItem("token");
+
+            if (!token) {
+
+                alert("Debes iniciar sesión");
+
+                return;
+            }
+
+            const response = await fetch(
+                "http://localhost:3001/api/reservas/create-checkout-session",
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+
+                    body: JSON.stringify({
+
+                        centerId: center.id_center,
+                        selectedDate,
+                        startHour,
+                        duration
+
+                    }),
+
+                }
+            );
+
+            const data =
+                await response.json();
+
+            window.location.href =
+                data.url;
+
+        } catch (error) {
+
+            console.error(error);
+
+        }
+
+    };
 
     return (
 
@@ -106,9 +183,7 @@ function CenterDetail() {
                     <div className="booking-card">
 
                         <h2 className="booking-price">
-                            {center.precio
-                                ? `${center.precio}€`
-                                : 'Sin precio'}
+                            {center.precio}€
                             <span> / hour</span>
                         </h2>
 
@@ -122,32 +197,71 @@ function CenterDetail() {
                             <input
                                 type="date"
                                 className="booking-input"
+                                value={selectedDate}
+                                min={new Date().toISOString().split("T")[0]}
+                                onChange={(e) =>
+                                    setSelectedDate(e.target.value)
+                                }
                             />
 
                         </div>
 
-                        {/* HOURS */}
+                        {/* START HOUR */}
                         <div className="booking-section">
 
                             <label className="booking-label">
-                                HOURS
+                                START HOUR
                             </label>
 
-                            <select className="booking-input">
+                            <input
+                                type="time"
+                                className="booking-input"
+                                value={startHour}
+                                onChange={(e) =>
+                                    setStartHour(e.target.value)
+                                }
+                            />
 
-                                <option>
-                                    1 Hour
-                                </option>
+                        </div>
 
-                                <option>
-                                    2 Hours
-                                </option>
+                        {/* DURATION */}
+                        <div className="booking-section">
 
-                                <option>
-                                    3 Hours
-                                </option>
+                            <label className="booking-label">
+                                DURATION
+                            </label>
+
+                            <select
+                                className="booking-input"
+                                value={duration}
+                                onChange={(e) =>
+                                    setDuration(Number(e.target.value))
+                                }
+                            >
+
+                                <option value={1}>1 Hour</option>
+                                <option value={2}>2 Hours</option>
+                                <option value={3}>3 Hours</option>
+                                <option value={4}>4 Hours</option>
+                                <option value={5}>5 Hours</option>
 
                             </select>
+
+                        </div>
+
+                        {/* END HOUR */}
+                        <div className="booking-section">
+
+                            <label className="booking-label">
+                                END HOUR
+                            </label>
+
+                            <input
+                                type="text"
+                                className="booking-input"
+                                value={calculateEndHour()}
+                                disabled
+                            />
 
                         </div>
 
@@ -157,13 +271,23 @@ function CenterDetail() {
                             <div className="summary-row">
 
                                 <span>
+                                    Duration
+                                </span>
+
+                                <span>
+                                    {duration}h
+                                </span>
+
+                            </div>
+
+                            <div className="summary-row">
+
+                                <span>
                                     Base Price
                                 </span>
 
                                 <span>
-                                    {center.precio
-                                        ? `${center.precio}€`
-                                        : '0€'}
+                                    {basePrice.toFixed(2)}€
                                 </span>
 
                             </div>
@@ -175,7 +299,7 @@ function CenterDetail() {
                                 </span>
 
                                 <span>
-                                    2€
+                                    {serviceFee}€
                                 </span>
 
                             </div>
@@ -187,16 +311,17 @@ function CenterDetail() {
                                 </span>
 
                                 <span>
-                                    {center.precio
-                                        ? `${parseFloat(center.precio) + 2}€`
-                                        : '0€'}
+                                    {totalPrice.toFixed(2)}€
                                 </span>
 
                             </div>
 
                         </div>
 
-                        <button className="booking-button">
+                        <button
+                            className="booking-button"
+                            onClick={handleBooking}
+                        >
                             Reservar
                         </button>
 
