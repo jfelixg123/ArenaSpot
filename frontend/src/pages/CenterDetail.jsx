@@ -154,7 +154,7 @@ function CenterDetail() {
                             className="center-main-image"
                         />
 
-                        {/* GALLERY */}
+                        {/* GALLERY
                         <div className="center-gallery">
 
                             <img
@@ -174,6 +174,117 @@ function CenterDetail() {
                                 alt="Gallery"
                                 className="gallery-image"
                             />
+
+                        </div> */}
+
+                        <div className="center-gallery">
+                            <h1 className="center-title">
+                                {center.nombre}
+                            </h1>
+
+                            {/* <p className="center-description">
+                                {center.descripcion}
+                            </p> */}
+                        </div>
+
+                        {/* =========================
+                    SPECS SECTION
+                ========================= */}
+
+                        <div className="specs-section">
+
+                            <div className="specs-header">
+
+                                <h2 className="specs-title">
+                                    Hardware Specs
+                                </h2>
+
+                            </div>
+
+                            <div className="specs-grid">
+
+                                {specs.map(spec => (
+
+                                    <div
+                                        key={spec.id_puesto}
+                                        className="spec-card"
+                                    >
+
+                                        <div className="spec-info">
+
+                                            <h4>
+                                                {spec.nombre_o_numero}
+                                            </h4>
+
+                                            <p>
+                                                Tipo: {spec.tipo}
+                                            </p>
+
+                                            {/* PC */}
+                                            {spec.cpu && (
+                                                <p>
+                                                    CPU: {spec.cpu}
+                                                </p>
+                                            )}
+
+                                            {spec.gpu && (
+                                                <p>
+                                                    GPU: {spec.gpu}
+                                                </p>
+                                            )}
+
+                                            {spec.ram && (
+                                                <p>
+                                                    RAM: {spec.ram}
+                                                </p>
+                                            )}
+
+                                            {spec.monitor && (
+                                                <p>
+                                                    Monitor: {spec.monitor}
+                                                </p>
+                                            )}
+
+                                            {/* VR */}
+                                            {spec.headset && (
+                                                <p>
+                                                    VR Headset: {spec.headset}
+                                                </p>
+                                            )}
+
+                                            {spec.controllers && (
+                                                <p>
+                                                    Controllers: {spec.controllers}
+                                                </p>
+                                            )}
+
+                                            {/* SIM */}
+                                            {spec.volante && (
+                                                <p>
+                                                    Volante: {spec.volante}
+                                                </p>
+                                            )}
+
+                                            {spec.pedales && (
+                                                <p>
+                                                    Pedales: {spec.pedales}
+                                                </p>
+                                            )}
+
+                                            {/* CONSOLA */}
+                                            {spec.plataforma && (
+                                                <p>
+                                                    Consola: {spec.plataforma}
+                                                </p>
+                                            )}
+
+                                        </div>
+
+                                    </div>
+
+                                ))}
+
+                            </div>
 
                         </div>
 
@@ -335,14 +446,6 @@ function CenterDetail() {
 
                 <div className="center-info-section">
 
-                    <h1 className="center-title">
-                        {center.nombre}
-                    </h1>
-
-                    <p className="center-description">
-                        {center.descripcion}
-                    </p>
-
                     <div className="map-section">
 
                         <h2 className="games-title">
@@ -353,107 +456,6 @@ function CenterDetail() {
                             lat={center.lat}
                             lng={center.lng}
                         />
-
-                    </div>
-
-                </div>
-
-                {/* =========================
-                    SPECS SECTION
-                ========================= */}
-
-                <div className="specs-section">
-
-                    <div className="specs-header">
-
-                        <h2 className="specs-title">
-                            Hardware Specs
-                        </h2>
-
-                    </div>
-
-                    <div className="specs-grid">
-
-                        {specs.map(spec => (
-
-                            <div
-                                key={spec.id_puesto}
-                                className="spec-card"
-                            >
-
-                                <div className="spec-info">
-
-                                    <h4>
-                                        {spec.nombre_o_numero}
-                                    </h4>
-
-                                    <p>
-                                        Tipo: {spec.tipo}
-                                    </p>
-
-                                    {/* PC */}
-                                    {spec.cpu && (
-                                        <p>
-                                            CPU: {spec.cpu}
-                                        </p>
-                                    )}
-
-                                    {spec.gpu && (
-                                        <p>
-                                            GPU: {spec.gpu}
-                                        </p>
-                                    )}
-
-                                    {spec.ram && (
-                                        <p>
-                                            RAM: {spec.ram}
-                                        </p>
-                                    )}
-
-                                    {spec.monitor && (
-                                        <p>
-                                            Monitor: {spec.monitor}
-                                        </p>
-                                    )}
-
-                                    {/* VR */}
-                                    {spec.headset && (
-                                        <p>
-                                            VR Headset: {spec.headset}
-                                        </p>
-                                    )}
-
-                                    {spec.controllers && (
-                                        <p>
-                                            Controllers: {spec.controllers}
-                                        </p>
-                                    )}
-
-                                    {/* SIM */}
-                                    {spec.volante && (
-                                        <p>
-                                            Volante: {spec.volante}
-                                        </p>
-                                    )}
-
-                                    {spec.pedales && (
-                                        <p>
-                                            Pedales: {spec.pedales}
-                                        </p>
-                                    )}
-
-                                    {/* CONSOLA */}
-                                    {spec.plataforma && (
-                                        <p>
-                                            Consola: {spec.plataforma}
-                                        </p>
-                                    )}
-
-                                </div>
-
-                            </div>
-
-                        ))}
 
                     </div>
 
