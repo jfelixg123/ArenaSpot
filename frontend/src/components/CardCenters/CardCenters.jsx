@@ -1,8 +1,10 @@
 import React from 'react';
 import './CardCenters.css';
 import GamingCenter from '../../assets/images/gaming-center.png';
+import { useNavigate } from "react-router-dom";
 
 export default function CardCenters({ center }) {
+    const navigate = useNavigate();
 
     return (
         <div className="center-card">
@@ -61,7 +63,10 @@ export default function CardCenters({ center }) {
 
                     </div>
 
-                    <button className="reserve-button">
+                    <button
+                        className="reserve-button"
+                        onClick={() => navigate(`/centers/${center.id_center}`)}
+                    >
                         Reservar
                     </button>
 

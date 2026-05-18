@@ -2,7 +2,7 @@ import { useMemo, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Register.module.css";
 import { registerClient, registerCenter } from "../../api";
-import MapPicker from "../../components/MapPicker";
+import MapPicker from "../../components/MapPicker/MapPicker";
 
 export default function Register() {
   const navigate = useNavigate();
