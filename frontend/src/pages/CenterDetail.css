@@ -1,0 +1,354 @@
+/* =========================
+   CENTER DETAIL PAGE
+========================= */
+
+.center-detail-page {
+    min-height: 100vh;
+    background-color: #050816;
+    color: white;
+    padding: 2rem;
+}
+
+/* =========================
+   TOP SECTION
+========================= */
+
+.center-top-section {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    align-items: flex-start;
+}
+
+/* =========================
+   LEFT SIDE
+========================= */
+
+.center-left {
+    flex: 2;
+}
+
+/* MAIN IMAGE */
+
+.center-main-image {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 2px solid #1F8AFF;
+    box-shadow: 0 0 25px rgba(31, 138, 255, 0.2);
+}
+
+/* GALLERY */
+
+.center-gallery {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.gallery-image {
+    width: 120px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #1F8AFF;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.gallery-image:hover {
+    transform: scale(1.05);
+}
+
+/* =========================
+   RIGHT SIDE BOOKING CARD
+========================= */
+
+.booking-card {
+    width: 320px;
+    background-color: #172237;
+    border: 2px solid #1F8AFF;
+    border-radius: 18px;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    position: sticky;
+    top: 2rem;
+}
+
+.booking-price {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+}
+
+.booking-price span {
+    font-size: 1rem;
+    color: #9ca3af;
+}
+
+.booking-section {
+    margin-top: 1.5rem;
+}
+
+.booking-label {
+    display: block;
+    font-size: 0.8rem;
+    color: #9ca3af;
+    margin-bottom: 0.5rem;
+}
+
+.booking-input {
+    width: 100%;
+    background-color: #0F172A;
+    border: 1px solid #1F8AFF;
+    border-radius: 10px;
+    padding: 0.9rem;
+    color: white;
+    outline: none;
+    box-sizing: border-box;
+}
+
+/* PRICE SUMMARY */
+
+.booking-summary {
+    margin-top: 1.5rem;
+    background-color: #0F172A;
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.7rem;
+    font-size: 0.95rem;
+}
+
+.summary-total {
+    border-top: 1px solid #1F8AFF;
+    padding-top: 0.8rem;
+    font-weight: bold;
+}
+
+/* BUTTON */
+
+.booking-button {
+    width: 100%;
+    margin-top: 1.5rem;
+    background-color: #1F8AFF;
+    border: none;
+    padding: 1rem;
+    border-radius: 12px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.booking-button:hover {
+    background-color: #1672d1;
+}
+
+/* =========================
+   CENTER INFO
+========================= */
+
+.center-info-section {
+    margin-top: 3rem;
+}
+
+.center-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.center-description {
+    color: #cbd5e1;
+    line-height: 1.7;
+    max-width: 900px;
+}
+
+/* =========================
+   SPECS SECTION
+========================= */
+
+.specs-section {
+    margin-top: 4rem;
+}
+
+.specs-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.specs-title {
+    font-size: 1.7rem;
+    margin-bottom: 1.5rem;
+}
+
+.specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.spec-card {
+    background-color: #172237;
+    border: 2px solid #1F8AFF;
+    border-radius: 16px;
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.spec-card:hover {
+    transform: translateY(-5px);
+}
+
+.spec-icon {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.spec-info h4 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.spec-info p {
+    margin: 0.3rem 0;
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.spec-status {
+    color: #22c55e;
+    font-weight: bold;
+}
+
+/* =========================
+   GAMES CAROUSEL
+========================= */
+
+.games-section {
+    margin-top: 4rem;
+}
+
+.games-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.games-carousel {
+
+    display: grid;
+
+    grid-auto-flow: column;
+
+    grid-auto-columns: calc((100% - 5rem) / 6);
+
+    gap: 1rem;
+
+    overflow-x: auto;
+
+    scroll-behavior: smooth;
+
+    padding-bottom: 1rem;
+}
+
+/* SCROLLBAR */
+
+.games-carousel::-webkit-scrollbar {
+    height: 8px;
+}
+
+.games-carousel::-webkit-scrollbar-track {
+    background: #111827;
+    border-radius: 20px;
+}
+
+.games-carousel::-webkit-scrollbar-thumb {
+    background: #1F8AFF;
+    border-radius: 20px;
+}
+
+/* CARD */
+
+.game-card {
+
+    min-width: 0;
+
+    transition: transform 0.3s ease;
+}
+
+.game-card:hover {
+    transform: translateY(-6px);
+}
+
+.game-image {
+
+    width: 100%;
+
+    height: 250px;
+
+    object-fit: cover;
+
+    border-radius: 14px;
+
+    border: 2px solid #1F8AFF;
+}
+
+.game-title {
+
+    margin-top: 0.8rem;
+
+    font-size: 1rem;
+
+    font-weight: bold;
+}
+
+.game-genre {
+
+    color: #94a3b8;
+
+    font-size: 0.9rem;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+
+    .center-top-section {
+        flex-direction: column;
+    }
+
+    .booking-card {
+        width: 100%;
+        position: static;
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .center-detail-page {
+        padding: 1rem;
+    }
+
+    .center-main-image {
+        height: 250px;
+    }
+
+    .gallery-image {
+        width: 80px;
+        height: 60px;
+    }
+
+}

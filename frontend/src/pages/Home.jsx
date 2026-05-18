@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import BarraBuscar from "../components/BarraBuscar/BarraBuscar";
-import MapPicker from "../components/MapPicker";
+import MapPicker from "../components//MapPicker/MapPicker";
 import BotonFiltros from "../components/BotonFiltros/BotonFiltros";
 import CardCenters from "../components/CardCenters/CardCenters";
 import "./Home.css";
