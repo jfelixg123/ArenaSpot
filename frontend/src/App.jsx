@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Landing from "./pages/Landing";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
+import EditarPerfil from "./pages/EditarPerfil";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/editar-perfil" element={<EditarPerfil />} />
 
         {/* fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />

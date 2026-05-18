@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const express = require('express');
 const pool = require('../config/db');
+const upload = require('../middleware/upload');
 
 const router = Router();
 
@@ -38,6 +39,15 @@ router.get('/', (req, res) => {
 
 router.get('/2', (req, res) => {
   res.json({ message: 'ok users 2' });
+});
+
+router.post('/upload-logo', upload.single('logo'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: 'No se recibió ninguna imagen' });
+  }
+
+  const logoUrl = `${req.protocol}://${req.get('host')}/uploads/logos/${req.file.filename}`;
+  return res.json({ message: 'Imagen subida correctamente', logoUrl });
 });
 
 module.exports = router;
