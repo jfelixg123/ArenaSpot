@@ -1,8 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import IndicadorScroll from './IndicadorScroll';
 import './Hero.css';
 
 function Hero() {
+  const navigate = useNavigate();
   return (
     <section className="hero">
       <div className="hero-content">
@@ -18,7 +20,7 @@ function Hero() {
           </h1>
         </div>
 
-        <button className="hero-button">
+        <button className="hero-button" onClick={() => navigate('/home')}>
           RESERVAR AHORA
         </button>
       </div>

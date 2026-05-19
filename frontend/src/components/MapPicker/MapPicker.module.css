@@ -24,3 +24,7 @@
 :global(.mapbox-popup-black) .mapboxgl-popup-content {
   color: #000 !important;
 }
+
+/* div, strong {
+  color: #000;
+} */
