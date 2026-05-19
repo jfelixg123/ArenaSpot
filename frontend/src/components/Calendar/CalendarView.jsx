@@ -23,11 +23,16 @@ useEffect(() => {
     .then(data => {
 
       const eventos = data.map(r => ({
-        title: "Reserva",
-        start: r.start || `${r.fecha}T${r.hora_inicio}`,
-        end: r.end || `${r.fecha}T${r.hora_fin}`
+        title: r.title,
+        start: r.start,
+        end: r.end,
+    
+        extendedProps: {
+          zona: r.extendedProps?.zona,
+          cliente: r.extendedProps?.cliente
+        }
       }));
-
+    
       setEvents(eventos);
     })
     .catch(err => console.error(err));

@@ -93,7 +93,7 @@ function Inventario() {
 
     const handleUpdate = async () => {
 
-        if (!idZona) {
+        if (!idZona || !nombre) {
             alert("Completa todos los campos");
             return;
         }
@@ -138,11 +138,11 @@ function Inventario() {
                             {showFiltros && (
                                 <div className="dropdownFiltros">
 
-                                    <button onClick={() => {setFiltroTipo("TODOS"); setShowFiltros(false);}}>Todos</button>
-                                    <button onClick={() => {setFiltroTipo("PC"); setShowFiltros(false);}}>PC</button>
-                                    <button onClick={() => {setFiltroTipo("CONSOLA"); setShowFiltros(false);}}>Consola</button>
-                                    <button onClick={() => {setFiltroTipo("VR"); setShowFiltros(false);}}>VR</button>
-                                    <button onClick={() => {setFiltroTipo("SIMULADOR"); setShowFiltros(false);}}>Simulador</button>
+                                    <button onClick={() => { setFiltroTipo("TODOS"); setShowFiltros(false); }}>Todos</button>
+                                    <button onClick={() => { setFiltroTipo("PC"); setShowFiltros(false); }}>PC</button>
+                                    <button onClick={() => { setFiltroTipo("CONSOLA"); setShowFiltros(false); }}>Consola</button>
+                                    <button onClick={() => { setFiltroTipo("VR"); setShowFiltros(false); }}>VR</button>
+                                    <button onClick={() => { setFiltroTipo("SIMULADOR"); setShowFiltros(false); }}>Simulador</button>
 
                                 </div>
                             )}
@@ -159,7 +159,9 @@ function Inventario() {
                     <div className="modal">
                         <div className="modalContent">
 
-                            <h2>Nuevo Equipo</h2>
+                            <h2>
+                                {editando ? "Editar Equipo" : "Nuevo Equipo"}
+                            </h2>
 
                             <input
                                 placeholder="Nombre (PC-6...)"
@@ -178,11 +180,62 @@ function Inventario() {
                             </select>
 
                             <div className="specsForm">
-                                <input placeholder="CPU" onChange={(e) => setSpecs({ ...specs, cpu: e.target.value })} />
-                                <input placeholder="GPU" onChange={(e) => setSpecs({ ...specs, gpu: e.target.value })} />
-                                <input placeholder="RAM" onChange={(e) => setSpecs({ ...specs, ram: e.target.value })} />
-                                <input placeholder="Almacenamiento" onChange={(e) => setSpecs({ ...specs, almacenamiento: e.target.value })} />
-                                <input placeholder="Monitor" onChange={(e) => setSpecs({ ...specs, monitor: e.target.value })} />
+
+                                <input
+                                    placeholder="CPU"
+                                    value={specs.cpu}
+                                    onChange={(e) =>
+                                        setSpecs({
+                                            ...specs,
+                                            cpu: e.target.value
+                                        })
+                                    }
+                                />
+
+                                <input
+                                    placeholder="GPU"
+                                    value={specs.gpu}
+                                    onChange={(e) =>
+                                        setSpecs({
+                                            ...specs,
+                                            gpu: e.target.value
+                                        })
+                                    }
+                                />
+
+                                <input
+                                    placeholder="RAM"
+                                    value={specs.ram}
+                                    onChange={(e) =>
+                                        setSpecs({
+                                            ...specs,
+                                            ram: e.target.value
+                                        })
+                                    }
+                                />
+
+                                <input
+                                    placeholder="Almacenamiento"
+                                    value={specs.almacenamiento}
+                                    onChange={(e) =>
+                                        setSpecs({
+                                            ...specs,
+                                            almacenamiento: e.target.value
+                                        })
+                                    }
+                                />
+
+                                <input
+                                    placeholder="Monitor"
+                                    value={specs.monitor}
+                                    onChange={(e) =>
+                                        setSpecs({
+                                            ...specs,
+                                            monitor: e.target.value
+                                        })
+                                    }
+                                />
+
                             </div>
 
                             <div>

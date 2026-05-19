@@ -4,6 +4,9 @@ import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import CenterMap from "../components/CenterMap/CenterMap";
 import "./CenterDetail.css";
+import dateIcon from "../assets/logos/calendario.png";
+import clockIcon from "../assets/logos/reloj.png";
+import durationIcon from "../assets/logos/arena.png";
 
 function CenterDetail() {
 
@@ -305,15 +308,25 @@ function CenterDetail() {
                                 DATE
                             </label>
 
-                            <input
-                                type="date"
-                                className="booking-input"
-                                value={selectedDate}
-                                min={new Date().toISOString().split("T")[0]}
-                                onChange={(e) =>
-                                    setSelectedDate(e.target.value)
-                                }
-                            />
+                            <div className="booking-input-wrapper">
+
+                                <img
+                                    src={dateIcon}
+                                    alt="Date"
+                                    className="input-icon"
+                                />
+
+                                <input
+                                    type="date"
+                                    className="booking-input"
+                                    value={selectedDate}
+                                    min={new Date().toISOString().split("T")[0]}
+                                    onChange={(e) =>
+                                        setSelectedDate(e.target.value)
+                                    }
+                                />
+
+                            </div>
 
                         </div>
 
@@ -324,14 +337,24 @@ function CenterDetail() {
                                 START HOUR
                             </label>
 
-                            <input
-                                type="time"
-                                className="booking-input"
-                                value={startHour}
-                                onChange={(e) =>
-                                    setStartHour(e.target.value)
-                                }
-                            />
+                            <div className="booking-input-wrapper">
+
+                                <img
+                                    src={clockIcon}
+                                    alt="Clock"
+                                    className="input-icon"
+                                />
+
+                                <input
+                                    type="time"
+                                    className="booking-input"
+                                    value={startHour}
+                                    onChange={(e) =>
+                                        setStartHour(e.target.value)
+                                    }
+                                />
+
+                            </div>
 
                         </div>
 
@@ -342,21 +365,29 @@ function CenterDetail() {
                                 DURATION
                             </label>
 
-                            <select
-                                className="booking-input"
-                                value={duration}
-                                onChange={(e) =>
-                                    setDuration(Number(e.target.value))
-                                }
-                            >
+                            <div className="booking-input-wrapper">
 
-                                <option value={1}>1 Hour</option>
-                                <option value={2}>2 Hours</option>
-                                <option value={3}>3 Hours</option>
-                                <option value={4}>4 Hours</option>
-                                <option value={5}>5 Hours</option>
+                                <img
+                                    src={durationIcon}
+                                    alt="Duration"
+                                    className="input-icon"
+                                />
 
-                            </select>
+                                <select
+                                    className="booking-input"
+                                    value={duration}
+                                    onChange={(e) =>
+                                        setDuration(Number(e.target.value))
+                                    }
+                                >
+                                    <option value={1}>1 Hour</option>
+                                    <option value={2}>2 Hours</option>
+                                    <option value={3}>3 Hours</option>
+                                    <option value={4}>4 Hours</option>
+                                    <option value={5}>5 Hours</option>
+                                </select>
+
+                            </div>
 
                         </div>
 

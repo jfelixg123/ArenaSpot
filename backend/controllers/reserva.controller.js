@@ -8,9 +8,15 @@ const obtenerReservas = async (req, res) => {
         const reservas = await getReservasByCenter(id_center);
 
         const events = reservas.map(r => ({
-            title: `${r.nombre_o_numero} - ${r.cliente}`,
+            title: `${r.zona} - ${r.nombre_o_numero}`,
             start: r.fecha_hora_inicio,
-            end: r.fecha_hora_fin
+            end: r.fecha_hora_fin,
+
+            extendedProps: {
+                cliente: r.cliente,
+                zona: r.zona,
+                puesto: r.nombre_o_numero
+            }
         }));
 
         res.json(events);
