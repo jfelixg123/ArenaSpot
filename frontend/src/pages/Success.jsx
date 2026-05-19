@@ -92,7 +92,7 @@ function Success() {
                         </Link>
 
                         <Link
-                            to="/profile"
+                            to="/mis-reservas"
                             className="success-btn secondary"
                         >
                             Ver mis reservas
