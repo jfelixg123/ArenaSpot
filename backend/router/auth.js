@@ -263,4 +263,45 @@ router.get("/me", authMiddleware, async (req, res) => {
 
 module.exports = router;
 
+// Actualizar perfil (nombre, telefono)
+router.put("/me", authMiddleware, async (req, res) => {
+  try {
+    const id = req.user.id_usuario;
+    const nombre = req.body?.nombre ? String(req.body.nombre).trim() : null;
+    const telefono = req.body?.telefono ? String(req.body.telefono).trim() : null;
+    const password = req.body?.password ? String(req.body.password) : null;
+
+    if (!nombre) {
+      return res.status(400).json({ message: "El nombre es obligatorio" });
+    }
+
+    if (password && String(password).length < 6) {
+      return res.status(400).json({ message: "La contraseña debe tener al menos 6 caracteres" });
+    }
+
+    if (password) {
+      const hash = await bcrypt.hash(String(password), 10);
+      await pool.query(
+        "UPDATE usuario SET nombre = ?, telefono = ?, password = ? WHERE id_usuario = ?",
+        [nombre, telefono || null, hash, id]
+      );
+    } else {
+      await pool.query(
+        "UPDATE usuario SET nombre = ?, telefono = ? WHERE id_usuario = ?",
+        [nombre, telefono || null, id]
+      );
+    }
+
+    const [rows] = await pool.query(
+      "SELECT id_usuario, nombre, email, rol, telefono FROM usuario WHERE id_usuario = ?",
+      [id]
+    );
+
+    res.json(rows[0]);
+  } catch (err) {
+    console.error("ME-UPDATE ERROR:", err);
+    res.status(500).json({ message: "Error al actualizar perfil" });
+  }
+});
+
 

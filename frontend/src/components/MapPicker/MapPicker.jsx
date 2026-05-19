@@ -11,10 +11,18 @@ export default function MapPicker({
   zoom = 12,
   resizeSignal = 0,      // cambia este prop para forzar resize (ej: step)
   flyTo = null,          // { lat, lng } | null (preview mientras escribe)
+  centers = [],          // lista de gaming centers para pintarlos en el mapa
 }) {
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
   const markerRef = useRef(null);
+  const centerMarkersRef = useRef([]);
+  const pendingCoordsRef = useRef(null);
+  const centersRef = useRef(centers);
+
+  useEffect(() => {
+    centersRef.current = centers;
+  }, [centers]);
 
   // init map (solo 1 vez)
   useEffect(() => {
@@ -30,6 +38,15 @@ export default function MapPicker({
     });
 
     mapRef.current.addControl(new mapboxgl.NavigationControl(), "top-right");
+
+    mapRef.current.on("load", () => {
+      const currentCenters = centersRef.current || [];
+      console.log("MapPicker: map loaded — rendering center markers, centers.length=", currentCenters.length);
+      renderCenterMarkers(currentCenters);
+      if (pendingCoordsRef.current) {
+        applyCoords(pendingCoordsRef.current, 14);
+      }
+    });
 
     mapRef.current.on("click", (e) => {
       const { lng, lat } = e.lngLat;
@@ -54,8 +71,10 @@ export default function MapPicker({
 
   // Helper: centrar mapa + marcador
   const applyCoords = (coords, minZoom = 14) => {
-    if (!mapRef.current) return;
     if (!coords?.lat || !coords?.lng) return;
+
+    pendingCoordsRef.current = coords;
+    if (!mapRef.current) return;
 
     if (!markerRef.current) {
       markerRef.current = new mapboxgl.Marker()
@@ -72,10 +91,66 @@ export default function MapPicker({
     });
   };
 
+  const clearCenterMarkers = () => {
+    console.log("MapPicker: clearing", centerMarkersRef.current.length, "center markers");
+    centerMarkersRef.current.forEach((marker) => marker.remove());
+    centerMarkersRef.current = [];
+  };
+
+  const renderCenterMarkers = (items) => {
+    if (!mapRef.current) return;
+    console.log("MapPicker: renderCenterMarkers called — items.length=", (items || []).length);
+
+    clearCenterMarkers();
+
+    const validCenters = (items || []).filter(
+      (centerItem) => centerItem?.lat != null && centerItem?.lng != null
+    );
+
+    console.log("MapPicker: validCenters.length=", validCenters.length);
+
+    validCenters.forEach((centerItem) => {
+      const isSelected =
+        value &&
+        Number(value.lat) === Number(centerItem.lat) &&
+        Number(value.lng) === Number(centerItem.lng);
+
+      const marker = new mapboxgl.Marker({
+        color: isSelected ? "#1f8aff" : "#22c55e",
+      })
+        .setLngLat([Number(centerItem.lng), Number(centerItem.lat)])
+        .setPopup(
+          new mapboxgl.Popup({ offset: 18, className: "mapbox-popup-black" }).setHTML(
+            `<strong>${centerItem.nombre || "Gaming center"}</strong><br>${centerItem.ciudad || ""}`
+          )
+        )
+        .addTo(mapRef.current);
+
+      centerMarkersRef.current.push(marker);
+    });
+
+    if (validCenters.length > 0 && !value && !flyTo) {
+      const bounds = new mapboxgl.LngLatBounds();
+      validCenters.forEach((centerItem) => {
+        bounds.extend([Number(centerItem.lng), Number(centerItem.lat)]);
+      });
+
+      mapRef.current.fitBounds(bounds, {
+        padding: 60,
+        duration: 500,
+        maxZoom: 14,
+      });
+    }
+  };
+
   // 1) Si cambia el value (definitivo), actualiza marcador y centra
   useEffect(() => {
     applyCoords(value, 14);
   }, [value?.lat, value?.lng]);
+
+  useEffect(() => {
+    renderCenterMarkers(centers);
+  }, [centers, value?.lat, value?.lng]);
 
   // 2) Si cambia flyTo (preview), mueve el mapa también
   //    (sin necesidad de “confirmar” lat/lng en el form)
