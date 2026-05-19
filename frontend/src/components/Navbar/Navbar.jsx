@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
 import mando from '../../assets/images/mando.png';
 import usuario from '../../assets/images/usuario.png';
 import './Navbar.css';
 
 function Header() {
+    const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef();
@@ -81,10 +82,13 @@ function Header() {
 
                         {open && (
                             <div className="dropdown-menu">
-                                <button className="dropdown-item">
+                                <button className="dropdown-item" onClick={() => navigate('/editar-perfil')}>
                                     Editar perfil
                                 </button>
-                                <button className="dropdown-item">
+                                <button
+                                    className="dropdown-item"
+                                    onClick={() => navigate("/mis-reservas")}
+                                >
                                     Mis reservas
                                 </button>
                                 <button className="dropdown-item logout" onClick={handleLogout}>
@@ -119,10 +123,13 @@ function Header() {
 
                             {open && (
                                 <div className="dropdown-menu">
-                                    <button className="dropdown-item">
+                                    <button className="dropdown-item" onClick={() => navigate('/editar-perfil')}>
                                         Editar perfil
                                     </button>
-                                    <button className="dropdown-item">
+                                    <button
+                                        className="dropdown-item"
+                                        onClick={() => navigate("/mis-reservas")}
+                                    >
                                         Mis reservas
                                     </button>
                                     <button className="dropdown-item logout" onClick={handleLogout}>

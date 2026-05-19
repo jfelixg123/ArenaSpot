@@ -19,3 +19,12 @@
   font-weight: 700;
   font-size: 13px;
 }
+
+/* Popup text color override for mapbox popups (apply globally) */
+:global(.mapbox-popup-black) .mapboxgl-popup-content {
+  color: #000 !important;
+}
+
+/* div, strong {
+  color: #000;
+} */

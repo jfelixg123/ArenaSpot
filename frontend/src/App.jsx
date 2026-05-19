@@ -6,6 +6,8 @@ import Register from "./pages/Auth/Register";
 import DashboardGC from "./pages/DashboardGC";
 import Inventario from "./pages/Inventario";
 import CenterDetail from "./pages/CenterDetail";
+import MisReservas from "./pages/MisReservas";
+import EditarPerfil from "./pages/EditarPerfil";
 
 export default function App() {
 
@@ -26,6 +28,9 @@ export default function App() {
                 <Route path="/dashboardGC" element={<DashboardGC />} />
 
                 <Route path="/gestionarInventario" element={<Inventario />} />
+
+                <Route path="/mis-reservas" element={<MisReservas />} />
+                <Route path="/editar-perfil" element={<EditarPerfil />} />
 
                 {/* fallback */}
                 <Route path="*" element={<Navigate to="/" replace />} />

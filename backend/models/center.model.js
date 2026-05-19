@@ -7,6 +7,8 @@ const getAllCentersModel = async () => {
             gc.id_center,
             gc.nombre,
             gc.descripcion,
+            gc.lat,
+            gc.lng,
             gc.direccion,
             gc.ciudad,
 
@@ -34,13 +36,13 @@ const getAllCentersModel = async () => {
             gc.id_center,
             gc.nombre,
             gc.descripcion,
+            gc.lat,
+            gc.lng,
             gc.direccion,
             gc.ciudad,
             cm.url
 
         ORDER BY gc.nombre ASC
-
-        LIMIT 4;
     `;
 
     const [rows] = await pool.query(query);

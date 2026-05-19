@@ -103,6 +103,11 @@
   opacity: 0.85;
 }
 
+.dropdown-link {
+  display: block;
+  text-decoration: none;
+}
+
 /* LOGOUT */
 .logout {
   background: #ff4d4f;
